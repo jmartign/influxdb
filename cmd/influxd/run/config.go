@@ -16,6 +16,7 @@ import (
 	"github.com/influxdb/influxdb/services/collectd"
 	"github.com/influxdb/influxdb/services/continuous_querier"
 	"github.com/influxdb/influxdb/services/graphite"
+	"github.com/influxdb/influxdb/services/hh"
 	"github.com/influxdb/influxdb/services/httpd"
 	"github.com/influxdb/influxdb/services/monitor"
 	"github.com/influxdb/influxdb/services/opentsdb"
@@ -83,6 +84,8 @@ type Config struct {
 	// Snapshot SnapshotConfig `toml:"snapshot"`
 	Monitoring      monitor.Config            `toml:"monitoring"`
 	ContinuousQuery continuous_querier.Config `toml:"continuous_queries"`
+
+	HintedHandoff hh.Config `toml:"hinted-handoff"`
 }
 
 // NewConfig returns an instance of Config with reasonable defaults.
@@ -97,6 +100,7 @@ func NewConfig() *Config {
 	c.HTTPD = httpd.NewConfig()
 	c.Monitoring = monitor.NewConfig()
 	c.ContinuousQuery = continuous_querier.NewConfig()
+	c.HintedHandoff = hh.NewConfig()
 
 	return c
 }

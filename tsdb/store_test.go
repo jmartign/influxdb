@@ -12,6 +12,7 @@ func TestStoreOpen(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
+	defer os.RemoveAll(dir)
 
 	if err := os.MkdirAll(filepath.Join(dir, "mydb"), 0600); err != nil {
 		t.Fatalf("failed to create test db dir: %v", err)
@@ -32,6 +33,7 @@ func TestStoreOpenShard(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Store.Open() failed to create temp dir: %v", err)
 	}
+	defer os.RemoveAll(dir)
 
 	path := filepath.Join(dir, "mydb", "myrp")
 	if err := os.MkdirAll(path, 0700); err != nil {
@@ -112,6 +114,7 @@ func TestStoreOpenNotDatabaseDir(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Store.Open() failed to create temp dir: %v", err)
 	}
+	defer os.RemoveAll(dir)
 
 	path := filepath.Join(dir, "bad_db_path")
 	if _, err := os.Create(path); err != nil {
@@ -171,6 +174,7 @@ func TestStoreOpenShardBadShardPath(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Store.Open() failed to create temp dir: %v", err)
 	}
+	defer os.RemoveAll(dir)
 
 	path := filepath.Join(dir, "mydb", "myrp")
 	if err := os.MkdirAll(path, 0700); err != nil {

@@ -222,11 +222,13 @@ func (s *Store) openRaft() error {
 // initialize attempts to bootstrap the raft store if there are no committed entries.
 func (s *Store) initialize() error {
 	// If we have committed entries then the store is already in the cluster.
-	if index, err := s.store.LastIndex(); err != nil {
-		return fmt.Errorf("last index: %s", err)
-	} else if index > 0 {
-		return nil
-	}
+	/*
+		if index, err := s.store.LastIndex(); err != nil {
+			return fmt.Errorf("last index: %s", err)
+		} else if index > 0 {
+			return nil
+		}
+	*/
 
 	// Force set peers.
 	if err := s.SetPeers(s.peers); err != nil {

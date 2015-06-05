@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	// DefaultBindAddress is the default bind address for the HTTP server.
+	// DefaultBindAddress is the default bind address for the cluster server.
 	DefaultBindAddress = ":8087"
 
 	// DefaultShardWriterTimeout is the default timeout set on shard writers.

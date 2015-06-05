@@ -45,9 +45,10 @@ func NewServer(c *Config, joinURLs string) *Server {
 
 	// Set the shard writer
 	s.ShardWriter = cluster.NewShardWriter(time.Duration(c.Cluster.ShardWriterTimeout))
+	s.ShardWriter.MetaStore = s.MetaStore
 
 	// Create the hinted handoff service
-	s.HintedHandoff = hh.NewService(c.HintedHandoff)
+	s.HintedHandoff = hh.NewService(c.HintedHandoff, s.ShardWriter)
 
 	// Initialize points writer.
 	s.PointsWriter = cluster.NewPointsWriter()
